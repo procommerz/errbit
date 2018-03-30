@@ -52,3 +52,19 @@ module Errbit
     config.active_job.queue_adapter = :sucker_punch
   end
 end
+
+ActionMailer::Base.delivery_method = :smtp
+
+ActionMailer::Base.default({
+                               from: "postmaster@sandbox9554f251138247e385d25bba2d1bb2c1.mailgun.org"
+                           })
+
+ActionMailer::Base.smtp_settings = {
+    :port           => 25,
+    :address        => "smtp.mailgun.org",
+    :user_name      => "postmaster@sandbox9554f251138247e385d25bba2d1bb2c1.mailgun.org",
+    :password       => "745ufhf784gfdjs74",
+    :domain         => 'sandbox9554f251138247e385d25bba2d1bb2c1.mailgun.org',
+    :authentication => :plain,
+    :enable_starttls_auto => false
+}
