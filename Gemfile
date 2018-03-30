@@ -20,7 +20,7 @@ gem 'font-awesome-rails'
 gem 'haml'
 gem 'htmlentities'
 gem 'kaminari', '>= 0.16.3'
-gem 'mongoid', '5.2.0'
+gem 'mongoid', '2.4.9'
 gem 'mongoid_rails_migrations'
 gem 'rack-ssl', require: 'rack/ssl' # force SSL
 gem 'rack-ssl-enforcer', require: false
