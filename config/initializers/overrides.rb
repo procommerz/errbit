@@ -14,4 +14,8 @@ Moped::BSON::ObjectId.class_eval do
   def bson_type
     ::String::BSON_TYPE
   end
+
+  def to_bson
+    to_s.to_bson
+  end
 end
