@@ -27,6 +27,8 @@ gem 'rack-ssl-enforcer', require: false
 gem 'rails_autolink'
 gem 'useragent'
 
+gem 'moped'
+
 gem 'webpacker', '~> 3.4'
 
 # Please don't update hoptoad_notifier to airbrake.
