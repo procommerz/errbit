@@ -36,4 +36,14 @@ class Api::V1::ProblemsController < ApplicationController
       format.xml { render xml: results }
     end
   end
+
+  def latest_production_problem
+    p = Problem.where(app_name: 'farmy.ch').sort(last_notice_at: 'desc').first
+
+    if p
+      render json: { message: p.message, where: p.where, notices: p.notices_count, last_at: p.last_notice_at }
+    else
+      render json: { status: 'perfect' } # this is a joke, p can never be nil with farmy
+    end
+  end
 end
