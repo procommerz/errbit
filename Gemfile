@@ -98,6 +98,7 @@ group :test do
 end
 
 group :heroku, :production do
+  gem 'test-unit'
   gem 'rails_12factor', require: ENV.key?("HEROKU")
 end
 
