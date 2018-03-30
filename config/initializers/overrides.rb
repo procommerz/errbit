@@ -15,7 +15,7 @@ Moped::BSON::ObjectId.class_eval do
     ::String::BSON_TYPE
   end
 
-  def to_bson
-    to_s.to_bson
+  def to_bson(buffer = ByteBuffer.new, validating_keys = Config.validating_keys?)
+    to_s.to_bson(buffer, validating_keys)
   end
 end
