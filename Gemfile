@@ -51,6 +51,8 @@ gem 'httparty'
 # Flowdock
 gem 'flowdock'
 
+gem 'kaminari-mongoid'
+
 # Authentication
 # ---------------------------------------
 # GitHub OAuth
