@@ -19,6 +19,11 @@ class Problem
   field :issue_link, type: String
   field :issue_type, type: String
 
+  # Add-on fields
+  field :family, type: String, default: 'unknown'
+  field :component, type: String, default: 'unknown'
+  field :severity, type: String, default: 'unknown'
+
   # Cached fields
   field :app_name, type: String
   field :notices_count, type: Integer, default: 0
@@ -31,6 +36,7 @@ class Problem
   field :hosts,       type: Hash, default: {}
   field :comments_count, type: Integer, default: 0
 
+
   index app_id: 1
   index app_name: 1
   index message: 1
@@ -38,6 +44,9 @@ class Problem
   index first_notice_at: 1
   index resolved_at: 1
   index notices_count: 1
+  index family: 1
+  index component: 1
+  index severity: 1
 
   index({
     error_class: "text",
@@ -55,6 +64,7 @@ class Problem
   validates :last_notice_at, :first_notice_at, presence: true
 
   before_create :cache_app_attributes
+  before_create :determine_problem_properties
 
   scope :resolved, -> { where(resolved: true) }
   scope :unresolved, -> { where(resolved: false) }
@@ -222,6 +232,49 @@ class Problem
 
   def cache_app_attributes
     self.app_name = app.name if app
+  end
+
+  def determine_problem_properties(force = false)
+    return true if !family.blank? and !force # don't do anything if fields are already calculated
+
+    if app.name.downcase['farmy.ch'] # only for farmy.ch
+      determine_farmy_problem
+    end
+    true
+  end
+
+  def determine_farmy_problem
+    where = self.where || notices.last.try(:backtrace).try(:lines).to_a[0].try(:[], "file")
+
+    family = 'unknown'
+    severity = 'unknown'
+    component = 'unknown'
+
+    if message['[safely]']
+      severity = 'very-low'
+    elsif message['NoMethodError: undefined method']
+      severity = 'critical'
+    end
+
+    if error_class.in?(["PG::CharacterNotInRepertoire"])
+      family = 'bad-user-input'
+      severity = 'very low'
+    end
+
+    if where['spree/api/frontend/products#autosuggest']
+      component = 'search'
+    elsif where['Der eingegebene Gutschein-Code existiert nicht']
+      family = 'bad-user-input'
+      component = 'checkout-discounts'
+      severity = 'very low'
+    end
+
+    # Push-down critical severity for known low-severity cases, based on 'where'
+    severity = 'low' if where['app/models/spree/package_return.rb'] and severity == 'critical'
+
+    self.family = family
+    self.severity = severity
+    self.component = component
   end
 
   def issue_type

@@ -20,6 +20,8 @@ gem 'font-awesome-rails'
 gem 'haml'
 gem 'htmlentities'
 gem 'kaminari', '>= 0.16.3'
+gem 'kaminari-mongoid'
+gem 'kaminari-actionview'
 gem 'mongoid', '5.0.2'
 gem 'mongoid_rails_migrations'
 gem 'rack-ssl', require: 'rack/ssl' # force SSL
@@ -51,7 +53,6 @@ gem 'httparty'
 # Flowdock
 gem 'flowdock'
 
-gem 'kaminari-mongoid'
 
 # Authentication
 # ---------------------------------------

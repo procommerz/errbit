@@ -57,6 +57,14 @@ class App
     where watchers: { "$elemMatch" => { "user_id" => user.id } }
   }
 
+  def self.farmy
+    @@farmy_app ||= (App.where(name: 'farmy.ch').first || App.first)
+  end
+
+  def self.sibl
+    @@sibl_app ||= (App.where(name: 'sibl.io').first || App.first)
+  end
+
   def build_notice_fingerprinter
     # no need to build a notice_fingerprinter if we already have one
     return if notice_fingerprinter.present?

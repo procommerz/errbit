@@ -1,0 +1,35 @@
+.problem-tags {
+  .tag {
+    padding: 1px 3px;
+    display: inline-block;
+    background: #7f7f7f;
+    color: white;
+    font-weight: bold;
+    font-size: 11px;
+    font-variant: small-caps;
+    margin-right: 4px;
+    //text-transform: uppercase;
+  }
+
+  .tag.component {
+    padding-right: 4px;
+    border-left: 3px solid #0d3349;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+  }
+
+  .tag.family {
+    background: #f1f1f1;
+    color: #888888;
+    border-radius: 6px;
+  }
+
+  .tag.severity {
+    text-shadow: 1px 1px 0px rgba(0,0,0,.5);
+    &.very-low { }
+    &.low { }
+    &.medium { background: #ffc520; }
+    &.high { background: #aa6677; }
+    &.critical { background: #aa0000; }
+  }
+}

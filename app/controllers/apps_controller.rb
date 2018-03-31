@@ -31,7 +31,7 @@ class AppsController < ApplicationController
       pr = pr.unresolved unless all_errs
       pr.in_env(
         params[:environment]
-      ).ordered_by(params_sort, params_order).page(params[:page]).per(current_user.per_page)
+      ).ordered_by(params_sort, params_order).page(params[:page]).per(params[:per_page] ? params[:per_page].to_i : current_user.per_page)
     end
   end
 

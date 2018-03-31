@@ -46,4 +46,8 @@ class Api::V1::ProblemsController < ApplicationController
       render json: { status: 'perfect' } # this is a joke, p can never be nil with farmy
     end
   end
+
+  def status_report
+    render json: {message: "Ahoy!"}
+  end
 end

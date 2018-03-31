@@ -64,6 +64,7 @@ Rails.application.routes.draw do
       resources :problems, :only => [:index, :show], :defaults => { :format => 'json' } do
         collection do
           get :latest_production_problem
+          get :status_report
         end
       end
 

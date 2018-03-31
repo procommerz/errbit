@@ -10,6 +10,8 @@
     = csrf_meta_tag
     = stylesheet_link_tag :application
     = javascript_include_tag :application
+    = javascript_pack_tag 'application'
+    %link(rel="stylesheet" href="https://toert.github.io/Isolated-Bootstrap/versions/4.0.0-beta/iso_bootstrap4.0.0min.css")
 
     = yield :head
   %body{:id => controller.controller_name, :class => controller.action_name}

@@ -22,7 +22,9 @@
   - else
     = link_to t('.watch'), app_watcher_path(app_id: app, id: current_user.id), method: :put, class: 'button'
 
-%h3#watchers_toggle
+= render partial: 'quickview'
+
+%h3#watchers_toggle(style='font-size: 60%')
   =t('.watchers')
   %span.click_span=t('.show_hide')
 #watchers_div
