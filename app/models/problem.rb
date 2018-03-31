@@ -269,8 +269,11 @@ class Problem
       severity = 'very low'
     end
 
+    family = 'rake' if where['rake#'] and family == 'unknown'
+
     # Push-down critical severity for known low-severity cases, based on 'where'
     severity = 'low' if where['app/models/spree/package_return.rb'] and severity == 'critical'
+    severity = 'low' if where['rake#farmy:instagram:get_farmy_feed']
 
     self.family = family
     self.severity = severity
