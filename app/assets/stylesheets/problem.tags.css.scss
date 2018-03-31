@@ -26,8 +26,8 @@
 
   .tag.severity {
     text-shadow: 1px 1px 0px rgba(0,0,0,.5);
-    &.very-low { }
-    &.low { }
+    &.very-low { background: #A1A1A1; }
+    &.low { background: #767676; }
     &.medium { background: #ffc520; }
     &.high { background: #aa6677; }
     &.critical { background: #aa0000; }

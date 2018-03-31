@@ -38,9 +38,9 @@
                     %em.commenter= (Errbit::Config.user_has_username ? comment.user.username : comment.user.email).to_s << ":"
                   %em= truncate(comment.body, :length => 100, :separator => ' ')
             %div.problem-tags
-              .tag.severity #{problem.severity || 'N/A'}
-              .tag.family #{problem.family || 'N/A'}
-              .tag.component #{problem.component || 'N/A'}
+              .tag.severity(class="#{problem.severity.to_s.downcase.gsub(' ', '-')}") #{problem.severity || 'N/A'}
+              .tag.family(class="#{problem.family.to_s.downcase.gsub(' ', '-')}") #{problem.family || 'N/A'}
+              .tag.component(class="#{problem.component.to_s.downcase.gsub(' ', '-')}") #{problem.component || 'N/A'}
 
           %td.latest
             - value = "#{time_ago_in_words(problem.last_notice_at)} #{I18n.t('problems.table.ago')}"
