@@ -26,10 +26,17 @@
 
   .tag.severity {
     text-shadow: 1px 1px 0px rgba(0,0,0,.5);
+    &.ignored { background: #e1e1e1; color: #848484; }
     &.very-low { background: #A1A1A1; }
     &.low { background: #767676; }
     &.medium { background: #ffc520; }
     &.high { background: #aa6677; }
     &.critical { background: #aa0000; }
+  }
+}
+
+.errs.selectable {
+  tr.severity-ignored {
+    opacity: 0.8;
   }
 }
