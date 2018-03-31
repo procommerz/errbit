@@ -244,7 +244,8 @@ class Problem
   end
 
   def determine_farmy_problem
-    where = self.where || notices.last.try(:backtrace).try(:lines).to_a[0].try(:[], "file")
+    where = self.where
+    where = notices.last.try(:backtrace).try(:lines).to_a[0].try(:[], "file") if where == 'unknown' || where == nil
 
     family = 'unknown'
     severity = 'unknown'
