@@ -52,7 +52,7 @@ module Problem::FarmyTagger
     family = 'rake' if where['rake#'] and family == 'unknown'
 
     # Override family for bots
-    if user_agent['bingbot']
+    if user_agent['bingbot'] or user_agent['AdsBot-Google']
       family = 'bot-requests'
       severity = 'very low'
     end
