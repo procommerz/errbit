@@ -11,9 +11,9 @@ class AppsController < ApplicationController
 
   expose(:apps) do
     if current_user.admin?
-      app_scope.to_a.sort.reject { |app| app.name.downcase['farmy'] == nil }.map { |app| AppDecorator.new(app) }
-    else
       app_scope.to_a.sort.map { |app| AppDecorator.new(app) }
+    else
+      app_scope.to_a.sort.reject { |app| app.name.downcase['farmy'] == nil }.map { |app| AppDecorator.new(app) }
     end
   end
 
