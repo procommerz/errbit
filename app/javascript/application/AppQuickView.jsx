@@ -52,9 +52,11 @@ class AppQuickView extends React.Component {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  ReactDOM.render(
-    <AppQuickView name="React" />,
-    $('app-quick-view')[0],
-  )
+  if ($('app-quick-view')[0]) {
+    ReactDOM.render(
+      <AppQuickView name="React" />,
+      $('app-quick-view')[0],
+    )
+  }
 });
 

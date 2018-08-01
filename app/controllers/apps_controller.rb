@@ -47,6 +47,31 @@ class AppsController < ApplicationController
 
   def show
     app
+
+    @problems = app.problems.order(created_at: :desc)
+
+    # Add search scopes
+    if params[:q]
+      @notices = Notice.where(app_id: app.id)
+
+      @notices = @notices.where(:created_at.gte => params[:q]["days_ago"].to_i.days.ago)
+
+      if params[:q]["request_param1_name"] and !params[:q]["request_param1_name"].blank?
+        @notices = @notices.where(:"request.params.#{params[:q]["request_param1_name"]}" => params[:q]["request_param1_value"].to_s)
+      end
+
+      if params[:q]["request_param2_name"] and !params[:q]["request_param2_name"].blank?
+        @notices = @notices.where(:"request.params.#{params[:q]["request_param2_name"]}" => params[:q]["request_param2_value"].to_s)
+      end
+
+      if params[:q]["session_param_name"] and !params[:q]["session_param_name"].blank?
+        @notices = @notices.where(:"request.session.#{params[:q]["session_param_name"]}" => params[:q]["session_param_value"].to_s)
+      end
+
+      @problems = app.problems.where(:id.in => Err.where(:id.in => @notices.pluck(:err_id).map(&:to_s)).pluck(:problem_id).map(&:to_s))
+    end
+
+    @problems = @problems.page(0).per(100)
   end
 
   def new

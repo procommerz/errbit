@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   before_action :authenticate_user!
   before_action :set_time_zone
 
+  # before_action(:byebug_request) if Rails.env.development? ###
+
   rescue_from ActionController::RedirectBackError, with: :redirect_to_root
 
 protected
@@ -32,5 +34,9 @@ protected
     user       = user_token && User.find_by(authentication_token: user_token)
 
     sign_in user, store: false if user
+  end
+
+  def byebug_request
+    byebug
   end
 end
