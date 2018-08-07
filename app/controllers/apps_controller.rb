@@ -71,7 +71,7 @@ class AppsController < ApplicationController
       @problems = app.problems.where(:id.in => Err.where(:id.in => @notices.pluck(:err_id).map(&:to_s)).pluck(:problem_id).map(&:to_s))
     end
 
-    @problems = @problems.page(0).per(params[:per_page] || 30)
+    @problems = @problems.page(params[:page] || 1).per(params[:per_page] || 30)
   end
 
   def new
