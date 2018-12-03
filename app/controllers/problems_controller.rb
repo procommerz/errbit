@@ -32,7 +32,8 @@ class ProblemsController < ApplicationController
       all_else_unresolved(all_errs).
       ordered_by(params_sort, params_order)
 
-    finder = finder.search(params[:search]) if params[:search].present?
+    # finder = finder.search(params[:search]) if params[:search].present?
+    finder = finder.where(message: Regexp.new(".*#{params[:search]}.*", "i")) if params[:search].present?
     finder.page(params[:page]).per(current_user.per_page)
   end
 
